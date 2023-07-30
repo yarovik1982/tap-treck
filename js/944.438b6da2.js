@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunktap_treck"]=self["webpackChunktap_treck"]||[]).push([[944],{9944:function(e,n,t){t.r(n),t.d(n,{default:function(){return f}});var a=t(3396);function r(e,n,t,r,u,c){return(0,a.wg)(),(0,a.iD)("h1",null,"Feedback Page")}var u={name:"feedback-page",setup(){}},c=t(89);const k=(0,c.Z)(u,[["render",r]]);var f=k}}]);
+//# sourceMappingURL=944.438b6da2.js.map
