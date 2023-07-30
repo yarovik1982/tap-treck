@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunktap_treck"]=self["webpackChunktap_treck"]||[]).push([[378],{8378:function(e,n,t){t.r(n),t.d(n,{default:function(){return p}});var r=t(3396);function u(e,n,t,u,a,c){return(0,r.wg)(),(0,r.iD)("h1",null,"News Page")}var a={name:"news-page",setup(){}},c=t(89);const s=(0,c.Z)(a,[["render",u]]);var p=s}}]);
+//# sourceMappingURL=378.5230ba25.js.map

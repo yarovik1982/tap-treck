@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunktap_treck"]=self["webpackChunktap_treck"]||[]).push([[469],{2469:function(e,t,r){r.r(t),r.d(t,{default:function(){return f}});var n=r(3396);function a(e,t,r,a,u,c){return(0,n.wg)(),(0,n.iD)("h1",null,"favorite page")}var u={name:"favorite-plices-page",setup(){}},c=r(89);const p=(0,c.Z)(u,[["render",a]]);var f=p}}]);
+//# sourceMappingURL=469.45c9f8f6.js.map

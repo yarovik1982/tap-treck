@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunktap_treck"]=self["webpackChunktap_treck"]||[]).push([[566],{6566:function(e,r,n){n.r(r),n.d(r,{default:function(){return s}});var t=n(3396);function u(e,r,n,u,a,c){return(0,t.wg)(),(0,t.iD)("h1",null,"Beer Page")}var a={name:"beer-page",setup(){}},c=n(89);const p=(0,c.Z)(a,[["render",u]]);var s=p}}]);
+//# sourceMappingURL=566.0ad52add.js.map
