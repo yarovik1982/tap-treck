@@ -19,5 +19,6 @@ export default {
 .layer{
    background-color: rgba(0,0,0,.5);
    padding: 20px 0;
+   min-height: 100vh;
 }
 </style>
