@@ -1,92 +1,98 @@
 <template>
-    <div class="wrapper">
+  <div class="wrapper">
     <header class="header">
       <app-header />
     </header>
-
     <main class="main">
-      <div class="container-full">
-         <div class="main-content">
-            <div class="main-item">
-               <div class="item-body">
-                  <div class="item-title">
-                     Насладитесь красивым закатом или приятной компанией с Tap<span>Treck</span>
-                  </div>
-                  <div class="item-offer">
-                     Попробуйте интересные и оригинальные сорта пива, которые можно найти у нас, и отметьте любой праздник с хорошей бутылкой пива.
-                  </div>
-                  <button class="read-As">Написать нам</button>
-               </div>
+      <section id="intro">
+        <div class="app-container">
+          <div class="row align-items-center justify-content-center">
+            <div class="col-7 col-lg-5 pb-lg-0 pb-3">
+              <div class="section-body">
+                <h2 class="section-title" style="font-weight: bold">
+                  Насладитесь красивым закатом или приятной компанией с Tap<span
+                    style="font-weight: normal"
+                    >Treck</span
+                  >
+                </h2>
+                <div class="section-offer mb-3">
+                  Попробуйте интересные и оригинальные сорта пива, которые можно
+                  найти у нас, и отметьте любой праздник с хорошей бутылкой
+                  пива.
+                </div>
+                <button class="btn btn-secondary px-3 btn-sm">
+                  Написать нам
+                </button>
+              </div>
             </div>
-            <div class="main-item">
-               <img class="item-img" src="@/assets/images/home.png" alt="BEER AT NATURE">
+            <div class="col-10 col-lg-7">
+              <img
+                src="@/assets/images/home.png"
+                class="w-100"
+                alt="BEER AT NATURE"
+                style="border-radius: 37px"
+              />
             </div>
-         </div>
-      </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="favorite" style="margin-top: 85px">
+        <div class="text-center">
+          <h2 class="title d-inline-block">Популярные места</h2>
+        </div>
+        <div class="app-container">
+          <app-slider-plices/>
+        </div>
+      </section>
+
+      <section id="news" style="margin-top: 85px">
+        <div class="text-center">
+          <h2 class="title d-inline-block">Новинки</h2>
+        </div>
+        <div class="app-container">
+         <app-news/>
+        </div>
+      </section>
     </main>
 
     <footer class="footer">
-      <app-footer/>
+      <app-footer />
     </footer>
   </div>
 </template>
 <script>
-import AppHeader from '@/components/AppHeader.vue'
-import AppFooter from '@/components/AppFooter.vue'
+import AppHeader from "@/components/AppHeader.vue";
+import AppFooter from "@/components/AppFooter.vue";
+import AppSliderPlices from '@/components/AppSliderPlices.vue';
+import AppNews from '@/components/AppNews.vue';
 
 export default {
-  components: { AppHeader, AppFooter },
-   name:'home-page',
-   setup() {
-      
-   },
-}
+  components: {
+    AppHeader,
+    AppFooter,
+    AppSliderPlices,
+    AppNews,
+  },
+  name: "home-page",
+  setup() {
+    
+  },
+};
 </script>
 
 <style scoped>
-.container-full {
-   max-width: 1920px;
-   padding-top: 46px;
-   margin: 0 auto;
+.title {
+  position: relative;
+  margin-bottom: 55px;
 }
-.main-content {
-   display: flex;
-   align-items: center;
-   justify-content: space-between;
-}
-.main-item {
-   color: #1E1E1E;
-}
-.item-body {
-   padding-left: 120px;
-   padding-top: 100px;
-   padding-bottom: 163px;
-   max-width: 700px;
-}
-.item-title {
-   font-size: 48px;
-   font-weight: bold;
-   line-height: 133.5%;
-   margin-bottom: 20px;
-}
-.item-title span{
-   font-weight: 400;
-}
-.item-offer {
-   font-size: 18px;
-   line-height: 178%;
-   margin-bottom: 120px;
-}
-.read-As {
-   padding: 20px 35.5px;
-   font-size: 24px;
-   color: #342A03;
-   background-color: #FFF1BB;
-   border: 0;
-   border-radius: 10px;
-}
-.item-img {
-   max-width: 1090px;
-   border-radius: 37px;
+.title::after {
+  position: absolute;
+  width: 50%;
+  height: 6px;
+  top: 100%;
+  left: 0;
+  content: "";
+  background-color: #fbcc04;
 }
 </style>

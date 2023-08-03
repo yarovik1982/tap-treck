@@ -1,5 +1,5 @@
 <template>
-  <form action="#" class="form">
+  <form action="#" class="form" @submit.prevent="submitForm">
     <div class="form-content">
       <div class="form-header">
         <div class="form-row">
@@ -15,9 +15,11 @@
           <input
             class="form-input"
             type="text"
-            name="name"
-            id="name"
+            name="userName"
+            id="userName"
             autocomplete="off"
+            v-model="userName"
+            required
           />
           <span class="form-label">Имя</span>
         </div>
@@ -25,10 +27,25 @@
           <img class="form-icon" src="@/assets/images/user.svg" alt="" />
           <input
             class="form-input"
+            type="text"
+            name="login"
+            id="login"
+            autocomplete="off"
+            v-model="login"
+            required
+          />
+          <span class="form-label">Логин</span>
+        </div>
+        <div class="form-row">
+          <img class="form-icon" src="@/assets/images/user.svg" alt="" />
+          <input
+            class="form-input"
             type="email"
-            name="email"
+            name="mail"
             id="email"
             autocomplete="off"
+            v-model="mail"
+            required
           />
           <span class="form-label">Email</span>
         </div>
@@ -43,6 +60,8 @@
             name="password"
             id="password"
             autocomplete="off"
+            v-model="password"
+            required
           />
           <span class="form-label">Пароль</span>
         </div>
@@ -57,6 +76,7 @@
             name="passwordConfirm"
             id="passwordConfirm"
             autocomplete="off"
+            required
           />
           <span class="form-label">Подтвердить пароль</span>
         </div>
@@ -112,13 +132,16 @@
             </div>
           </div>
         </div>
+        <p>{{message}}</p>
       </div>
     </div>
   </form>
 </template>
 <script>
 import { ref, computed } from "vue";
+import { useRouter} from "vue-router"
 import LoginBySocial from './LoginBySocial.vue';
+import {BASE_URL} from '@/HelperFunctions/BaseUrl'
 export default {
   components: { LoginBySocial },
   name: "register-form",
@@ -134,12 +157,52 @@ export default {
         return marker.value[index] ? "text" : "password";
       };
     });
+    const userName = ref('')
+    const login    = ref('')
+    const mail     = ref('')
+    const password = ref('')
+    const message  = ref('')
+    const router = useRouter()
+    const submitForm = async () => {
+      
+      // const URL = 'https://jsonplaceholder.typicode.com/posts'
+
+      // const BASE_URL =   //___ базовый адрес сервера спрятать в глобал   
+      const registerData = {
+        userName:userName.value,
+        login   :login.value,
+        mail    :mail.value,
+        password:password.value
+      }
+
+      try{
+        const response = await fetch((BASE_URL + 'user/create'), {
+          // const response = await fetch( URL,{
+          method: 'POST',
+          headers:{
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(registerData),
+        })
+          if(response.ok){
+            message.value = "Регистрация прошла успешно, через несколько секунд вы будете перенаправлены на страницу входа в свой аккаунт!"
+
+            setTimeout(() => {
+              router.push('/login')
+            }, 5000)
+          }else {
+          message.value = 'Ошибка регистрации. Попробуйте еще раз.';
+        }
+      }catch(error){
+         message.value = 'Произошла ошибка при отправке запроса. Попробуйте позже.';
+        console.error(error);
+      }
+    }
     return {
-      marker,
-      isChecked,
-      isCheckedPolicy,
-      toggleType,
-      getInputType,
+      marker, isChecked,isCheckedPolicy,
+      toggleType, getInputType, userName,
+      login, mail, password, message, 
+      submitForm, router
     };
   },
 };

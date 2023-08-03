@@ -1,81 +1,67 @@
 <template>
-  <header class="header">
-    <div class="container">
-      <div class="header-row">
-        <a href="#" class="header-logo">
-          <img src="@/assets/images/Layer1.svg" alt="BEER" />
+    <div class="app-container">
+  <nav class="navbar navbar-expand">
+      <a class="navbar-brand" href="#">
+        <img src="@/assets/images/Layer1.svg" alt="BEER" />
           <strong style="margin-left: 20px">Tap</strong><span>Treck</span>
-        </a>
-        <form action="#" class="header-search">
-          <input
-            class="header-input radius-l2"
-            type="text"
-            placeholder="Введите запрос"
-            name="search"
-          />
-          <button
-            class="btn-yellow radius-r2"
-            style="
-              height: 52px;
-              width: 65px;
-              display: flex;
-              justify-content: center;
-              align-items: center;
-              border: none;
-            "
+      </a>
+      <div class="collapse navbar-collapse" id="navbarsExample02">
+        <div class="w-50" style="margin-left:auto;margin-right:16px;">
+          <form role="search" class="d-flex justify-content-center align-items-center" >
+          <input class="form-control form-control-sm" type="search" placeholder="Поиск"
+            style="border:2px solid yellow;border-radius:22px 0 0 22px;outline:none;box-shadow:none;"
           >
+          <button class="btn btn-warning btn-sm" style="border-radius:0px 22px 22px 0px;box-shadow:0 0 0 1px #FFC107;">
             <i class="bi bi-search" style="color: #fff"></i>
           </button>
         </form>
-        <button
-          class="btn-yellow btn-normal radius-10"
-          id="register"
-          style="margin-right: 40px"
-          @click="$router.push('/register')"
-        >
-          Регистрация
-        </button>
-        <button 
-          class="btn-yellow btn-normal radius-10" 
-          id="login"
-          @click="$router.push('/login')"
-        >
-          Вход
-        </button>
+        </div>
+        <button class="btn btn-warning btn-sm px-5" @click="$router.push('/login')">Вход</button>
+        <button class="btn btn-warning btn-sm px-5" style="margin-left:16px;" @click="$router.push('/register')">Регистрация</button>
       </div>
-      <div class="header-row">
-        <ul class="header-list">
-          <li class="header-list-item">
+  </nav>
+
+  <nav class="navbar navbar-expand-lg" aria-label="Fifth navbar example">
+    
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#burger" aria-controls="burger" aria-expanded="false" aria-label="Переключить навигацию">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="burger">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="header-list-item px-2">
             <router-link to="/" class="header-list-link">Главная</router-link>
           </li>
-          <li class="header-list-item">
+          <li class="header-list-item px-2">
             <router-link to="/favorite" class="header-list-link"
               >Популярные места</router-link
             >
           </li>
-          <li class="header-list-item">
+          <li class="header-list-item px-2">
             <router-link to="/news" class="header-list-link">Новинки</router-link>
           </li>
-          <li class="header-list-item">
+          <li class="header-list-item px-2">
             <router-link to="/reviews" class="header-list-link">Отзывы</router-link>
           </li>
-          <li class="header-list-item">
+          <li class="header-list-item px-2">
             <router-link to="/beer" class="header-list-link">Пиво</router-link>
           </li>
-          <li class="header-list-item">
+          <li class="header-list-item px-2">
             <router-link to="/breweries" class="header-list-link">Пивоварни</router-link>
           </li>
-          <li class="header-list-item">
+          <li class="header-list-item px-2">
             <router-link to="/feedback" class="header-list-link"
               >Написать нам</router-link
             >
           </li>
         </ul>
       </div>
+    
+  </nav>
     </div>
-  </header>
 </template>
 <script>
+import 'bootstrap/dist/css/bootstrap.min.css'
 export default {
    name:'app-header',
    setup() {

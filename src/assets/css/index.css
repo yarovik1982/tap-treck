@@ -9,7 +9,10 @@
  ul,li{
    list-style: none;
  }
-.container{
+ .none{
+   display: none;
+ }
+.app-container{
    max-width: 1700px;
    margin: 0 auto;
    padding: 0 10px;
