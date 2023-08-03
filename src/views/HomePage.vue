@@ -54,6 +54,15 @@
          <app-news/>
         </div>
       </section>
+
+      <section id="reviews" style="margin-top: 85px">
+         <div class="text-center">
+          <h2 class="title d-inline-block">Отзывы</h2>
+        </div>
+        <div class="app-container">
+         <app-reviews/>
+        </div>
+      </section>
     </main>
 
     <footer class="footer">
@@ -66,13 +75,14 @@ import AppHeader from "@/components/AppHeader.vue";
 import AppFooter from "@/components/AppFooter.vue";
 import AppSliderPlices from '@/components/AppSliderPlices.vue';
 import AppNews from '@/components/AppNews.vue';
-
+import AppReviews from '@/components/AppReviews.vue';
 export default {
   components: {
     AppHeader,
     AppFooter,
     AppSliderPlices,
     AppNews,
+    AppReviews,
   },
   name: "home-page",
   setup() {
