@@ -7,9 +7,13 @@
       :navigation="true"
       :pagination="{
       clickable: true,
+      dynamicBullets:true,
+      }"
+      :autoplay="{
+         delay:700,
       }"
       :modules="modules" 
-      class="mySwiper"
+      class="reviewsSwiper"
    >
     <swiper-slide v-for="reviewItem in reviewsList" :key="reviewItem.id">
       <div class="slide-image">
@@ -22,8 +26,6 @@
          <span>{{reviewItem.userName}}</span>
       </div>
     </swiper-slide>
-
-
   </swiper>
 </template>
 <script>
@@ -48,6 +50,10 @@
          {id: 4, userName:'Вилка Булочка', review:'', image:require('@/assets/images/right-slide.png')},
          {id: 5, userName:'Щука Подкоряжная', review:'', image:require('@/assets/images/center-slade.png')},
          {id: 6, userName:'Карась Пучеглазов', review:'', image:require('@/assets/images/left-slide.png')},
+         {id: 7, userName:'Карась Пучеглазов', review:'', image:require('@/assets/images/right-slide.png')},
+         {id: 8, userName:'Карась Пучеглазов', review:'', image:require('@/assets/images/center-slade.png')},
+         {id: 9, userName:'Карась Пучеглазов', review:'', image:require('@/assets/images/left-slide.png')},
+         {id: 10, userName:'Карась Пучеглазов', review:'', image:require('@/assets/images/right-slide.png')},
       ])
       return {
         modules: [Pagination, Navigation],
@@ -56,6 +62,8 @@
     },
   };
 </script>
+
+
 <style scoped>
 .swiper{
    padding-top: 50px;
@@ -106,10 +114,13 @@
 .review {
    position: absolute;
    top: 100%;
-   /* left: -50%;
-   transform: translateX(50%); */
-   max-width: 200%;
+   width: 200%;
    text-align: center;
+}
+.reviewsSwiper > .swiper-pagination .swiper-pagination-bullet{
+   width: 20px;
+   height: 20px;
+   background-color: yellow;
 }
 
 </style>

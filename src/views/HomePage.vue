@@ -37,7 +37,7 @@
         </div>
       </section>
 
-      <section id="favorite" style="margin-top: 85px">
+      <section id="favorite" >
         <div class="text-center">
           <h2 class="title d-inline-block">Популярные места</h2>
         </div>
@@ -46,7 +46,7 @@
         </div>
       </section>
 
-      <section id="news" style="margin-top: 85px">
+      <section id="news" >
         <div class="text-center">
           <h2 class="title d-inline-block">Новинки</h2>
         </div>
@@ -55,13 +55,17 @@
         </div>
       </section>
 
-      <section id="reviews" style="margin-top: 85px">
+      <section id="reviews" >
          <div class="text-center">
           <h2 class="title d-inline-block">Отзывы</h2>
         </div>
         <div class="app-container">
          <app-reviews/>
         </div>
+      </section>
+
+      <section id="offers">
+        <app-offers/>
       </section>
     </main>
 
@@ -76,6 +80,7 @@ import AppFooter from "@/components/AppFooter.vue";
 import AppSliderPlices from '@/components/AppSliderPlices.vue';
 import AppNews from '@/components/AppNews.vue';
 import AppReviews from '@/components/AppReviews.vue';
+import AppOffers from '@/components/AppOffers.vue';
 export default {
   components: {
     AppHeader,
@@ -83,6 +88,7 @@ export default {
     AppSliderPlices,
     AppNews,
     AppReviews,
+    AppOffers,
   },
   name: "home-page",
   setup() {

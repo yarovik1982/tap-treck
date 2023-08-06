@@ -17,6 +17,9 @@
    margin: 0 auto;
    padding: 0 10px;
 }
+section:not(#intro){
+   margin-top: 85px;
+}
 button{
    cursor: pointer;
 }
