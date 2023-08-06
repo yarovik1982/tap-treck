@@ -1,5 +1,5 @@
 <template>
-  <form action="#" class="form">
+  <form action="#" class="form" @submit.prevent="auth">
     <div class="form-content">
       <div class="form-header">
         <div class="form-row">
@@ -18,20 +18,11 @@
             name="name"
             id="name"
             autocomplete="off"
+            v-model="login"
+            required
           />
           <span class="form-label">Имя</span>
         </div>
-        <!-- <div class="form-row">
-          <img class="form-icon" src="@/assets/images/user.svg" alt="" />
-          <input
-            class="form-input"
-            type="email"
-            name="email"
-            id="email"
-            autocomplete="off"
-          />
-          <span class="form-label">Email</span>
-        </div> -->
         <div class="form-row">
           <div class="form-icon" @click="toggleType">
             <i class="bi bi-eye-slash" v-if="!marker"></i>
@@ -43,23 +34,11 @@
             name="password"
             id="password"
             autocomplete="off"
+            v-model="password"
+            required
           />
           <span class="form-label">Пароль</span>
         </div>
-        <!-- <div class="form-row">
-          <div class="form-icon" @click="toggleType(1)">
-            <i class="bi bi-eye-slash" v-if="!marker[1]"></i>
-            <i class="bi bi-eye" v-else></i>
-          </div>
-          <input
-            class="form-input"
-            :type="getInputType(1)"
-            name="passwordConfirm"
-            id="passwordConfirm"
-            autocomplete="off"
-          />
-          <span class="form-label">Подтвердить пароль</span>
-        </div> -->
         <div class="form-row-check">
           <input
             class="form-input-check-fake"
@@ -93,15 +72,22 @@
          <login-by-social></login-by-social>
       </div>
     </div>
+    <p>{{message}}</p>
   </form>
 </template>
 <script>
-import { ref, watch } from "vue";
+import { ref, watch, } from "vue";
+import { useRouter} from "vue-router"
 import LoginBySocial from './LoginBySocial.vue';
+import{BASE_URL} from '@/HelperFunctions/BaseUrl'
 export default {
   components: { LoginBySocial },
   name: "register-form",
   setup() {
+    const login = ref('')
+    const password = ref('')
+    const message = ref('')
+    const toProfile = useRouter()
     const marker = ref(false);
     const isChecked = ref(true);
    const getInputType = ref('password')
@@ -111,11 +97,35 @@ export default {
       watch(marker,() => {
          getInputType.value = marker.value ? 'text' : 'password'
       })
+
+      const auth = async() => {
+        const authData = {
+          login:login.value,
+          password: password.value
+        }
+        try{
+          const response = await fetch((BASE_URL + 'user/auth'), {
+            method: 'POST',
+          headers:{
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(authData),
+          })
+          if(response.ok){
+            toProfile.push('/profile')
+          }else message.value = "Упс , что-то пошло не так. Попробуйте заново!"
+        }catch(error){
+          message.value = 'Произошла ошибка при отправке запроса. Попробуйте заново!.'
+          console.log(error);
+        }
+      }
     return {
       marker,
       isChecked,
       toggleType,
       getInputType,
+      auth,
+      message, login,password,
     };
   },
 };

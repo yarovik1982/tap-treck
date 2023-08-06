@@ -164,10 +164,6 @@ export default {
     const message  = ref('')
     const router = useRouter()
     const submitForm = async () => {
-      
-      // const URL = 'https://jsonplaceholder.typicode.com/posts'
-
-      // const BASE_URL =   //___ базовый адрес сервера спрятать в глобал   
       const registerData = {
         userName:userName.value,
         login   :login.value,

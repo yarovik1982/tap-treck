@@ -1,0 +1,4 @@
+{
+   userTest: madbad_o
+   password: 8dC96IOm
+}

@@ -20,6 +20,12 @@ const routes = [
     component:() => import('@/views/LoginPage.vue')
   },
   {
+    path:'/profile',
+    name:'profile-page',
+    meta:{layout:'main'},
+    component:() => import('@/views/ProfilePage.vue')
+  },
+  {
     path:'/favorite',
     name:'favorite-place-page',
     meta:{layout:'main'},
