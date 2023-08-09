@@ -6,7 +6,7 @@
       :auto-height="true"
       :loop="true"
       :autoplay="{
-         delay:1000,
+         delay:1000,                            
       }"
       :navigation="{
         prevEl: '.swiper-button-prev',

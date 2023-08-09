@@ -33,28 +33,42 @@
             </button>
           </form>
         </div>
-        <button
-          class="btn btn-warning btn-sm px-5 d-none d-md-block"
-          @click="$router.push('/login')"
+        <div class="user-btns d-flex"
+          v-if="!(data && Object.keys(data).length > 0)"
         >
-          Вход
-        </button>
-        <button
-          class="btn btn-warning btn-sm px-5 d-none d-md-block"
-          style="margin-left: 16px"
-          @click="$router.push('/register')"
-        >
-          Регистрация
-        </button>
-        <i 
-          class="bi bi-box-arrow-in-right d-block d-md-none" 
-          style="color:rgb(255,193,7);font-size:32px;cursor:pointer;"
-          @click="$router.push('/login')"
-        ></i>
-        <i 
-          class="bi bi-person-square d-block d-md-none" 
-          style="color:rgb(255,193,7);font-size:30px;cursor:pointer;margin-left:16px;"
-          @click="$router.push('/register')"
+          <button
+            class="btn btn-warning btn-sm px-5 d-none d-md-block"
+            @click="$router.push('/login')"
+          >
+            Вход
+          </button>
+          <button
+            class="btn btn-warning btn-sm px-5 d-none d-md-block"
+            style="margin-left: 16px"
+            @click="$router.push('/register')"
+          >
+            Регистрация
+          </button>
+          <i
+            class="bi bi-box-arrow-in-right d-block d-md-none"
+            style="color: rgb(255, 193, 7); font-size: 32px; cursor: pointer"
+            @click="$router.push('/login')"
+          ></i>
+          <i
+            class="bi bi-person-square d-block d-md-none"
+            style="
+              color: rgb(255, 193, 7);
+              font-size: 30px;
+              cursor: pointer;
+              margin-left: 16px;
+            "
+            @click="$router.push('/register')"
+          ></i>
+        </div>
+        <i class="bi bi-box-arrow-left"
+          v-else
+          style="font-size:40px; color:#FFC107;cursor:pointer;"
+          @click="logout"
         ></i>
       </div>
     </nav>
@@ -110,11 +124,14 @@
                 >Написать нам</router-link
               >
             </li>
-          <li class="header-list-item px-2">
-            <router-link to="/profile" class="header-list-link"
-              >Профиль</router-link
+            <li
+              class="header-list-item px-2"
+              v-show="data && Object.keys(data).length > 0"
             >
-          </li>
+              <router-link to="/profile" class="header-list-link"
+                >Профиль</router-link
+              >
+            </li>
           </ul>
         </div>
       </div>
@@ -123,9 +140,25 @@
 </template>
 <script>
 import "bootstrap/dist/css/bootstrap.min.css";
+import { GetDataProfile, ClearDataProfile } from "@/HelperFunctions/GetDataProfile.js";
+import { ref } from "vue";
+import {useRouter} from 'vue-router'
 export default {
   name: "app-header",
-  setup() {},
+  setup() {
+    const dataProfile = GetDataProfile();
+    const data = ref(dataProfile);
+    const router = useRouter()
+    const logout = () => {
+      ClearDataProfile()
+      router.push('/')
+    }
+    return {
+      data,
+      logout,
+      router
+    };
+  },
 };
 </script>
 

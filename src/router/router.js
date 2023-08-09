@@ -23,7 +23,29 @@ const routes = [
     path:'/profile',
     name:'profile-page',
     meta:{layout:'main'},
-    component:() => import('@/views/ProfilePage.vue')
+    component:() => import('@/views/ProfilePage.vue'),
+    children:[
+      {
+        path:'/profile/profile-favorites',
+        name:'profile-favorites',
+        component:() => import('@/views/ProfileFavoritesPage.vue')
+      },
+      {
+        path:'/profile/profile-reviews',
+        name: 'profile-reviews',
+        component:() => import('@/views/ProfileReviewsPage.vue')
+      },
+      {
+        path:'/profile/profile-beweries',
+        name:'profile-beweries',
+        component:() => import('@/views/ProfileBeweriesPage.vue')
+      },
+      {
+        path:'/profile/profile-shops',
+        name:'profile-shops',
+        component:() => import('@/views/ProfileShopsPage.vue')
+      },
+    ]
   },
   {
     path:'/favorite',

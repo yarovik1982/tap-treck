@@ -4,9 +4,9 @@
       <div class="form-header">
         <div class="form-row">
           <h4 class="form-title active">Вход</h4>
-          <h4 class="form-title"
-            @click="$router.push('/register')"
-          >Регистрация</h4>
+          <h4 class="form-title" @click="$router.push('/register')">
+            Регистрация
+          </h4>
         </div>
       </div>
       <div class="form-body">
@@ -65,74 +65,92 @@
           Войти
         </button>
         <div class="form-reset-password">
-         <a href="#">Забыли пароль?</a>
+          <a href="#">Забыли пароль?</a>
         </div>
       </div>
       <div class="form-footer">
-         <login-by-social></login-by-social>
+        <login-by-social></login-by-social>
       </div>
     </div>
-    <p>{{message}}</p>
+    <p>{{ message }}</p>
   </form>
 </template>
 <script>
-import { ref, watch, } from "vue";
-import { useRouter} from "vue-router"
-import LoginBySocial from './LoginBySocial.vue';
-import{BASE_URL} from '@/HelperFunctions/BaseUrl'
+import { ref, watch } from "vue";
+import { useRouter } from "vue-router";
+import LoginBySocial from "./LoginBySocial.vue";
+import { BASE_URL } from "@/HelperFunctions/BaseUrl";
 export default {
   components: { LoginBySocial },
   name: "register-form",
   setup() {
-    const login = ref('')
-    const password = ref('')
-    const message = ref('')
-    const toProfile = useRouter()
+    const login = ref("madbad_o");
+    const password = ref("8dC96IOm");
+    const message = ref("");
+    const toProfile = useRouter();
     const marker = ref(false);
     const isChecked = ref(true);
-   const getInputType = ref('password')
+    const getInputType = ref("password");
     const toggleType = () => {
       marker.value = !marker.value;
     };
-      watch(marker,() => {
-         getInputType.value = marker.value ? 'text' : 'password'
-      })
+    watch(marker, () => {
+      getInputType.value = marker.value ? "text" : "password";
+    });
 
-      const auth = async() => {
-        const authData = {
-          login:login.value,
-          password: password.value
-        }
-        try{
-          const response = await fetch((BASE_URL + 'user/auth'), {
-            method: 'POST',
-          headers:{
-            'Content-Type': 'application/json',
+    const auth = async () => {
+      const authData = {
+        login: login.value,
+        password: password.value,
+      };
+      try {
+        const response = await fetch(BASE_URL + "user/auth", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
           },
           body: JSON.stringify(authData),
-          })
-          if(response.ok){
-            toProfile.push('/profile')
-          }else message.value = "Упс , что-то пошло не так. Попробуйте заново!"
-        }catch(error){
-          message.value = 'Произошла ошибка при отправке запроса. Попробуйте заново!.'
-          console.log(error);
+        });
+        if (response.ok) {
+          const data = await response.json();
+          const token = data.token;
+          document.cookie = `token=${token}; path=/`;
+          const profileResponse = await fetch(BASE_URL + "user/profile", {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+          if (profileResponse.ok) {
+            const profileData = await profileResponse.json();
+
+            localStorage.setItem("user", JSON.stringify(profileData));
+            toProfile.push("/profile");
+          } else
+            message.value = "Упс , что-то пошло не так. Попробуйте заново!";
         }
+      } catch (error) {
+        message.value =
+          "Произошла ошибка при отправке запроса. Попробуйте заново!.";
+        console.log(error);
       }
+    };
+
     return {
       marker,
       isChecked,
       toggleType,
       getInputType,
       auth,
-      message, login,password,
+      message,
+      login,
+      password,
     };
   },
 };
 </script>
 
 <style scoped>
-@import '@/assets/css/auth.css';
+@import "@/assets/css/auth.css";
 /* .form {
   width: 509px;
   background-color: #fff;
